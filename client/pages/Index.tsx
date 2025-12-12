@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Heart, Send } from "lucide-react";
 import { Confetti } from "@/components/Confetti";
+import { BirthdayAudio } from "@/components/BirthdayAudio";
 
 export default function Index() {
   const [wishes, setWishes] = useState<Array<{ name: string; message: string }>>([]);
