@@ -19,7 +19,9 @@ export function BirthdayAudio() {
         console.log("Autoplay prevented. Audio will play on user interaction.");
         // Add a one-time listener for user interaction to play audio
         const playOnInteraction = () => {
-          audio.play().catch(err => console.error("Failed to play audio:", err));
+          audio
+            .play()
+            .catch((err) => console.error("Failed to play audio:", err));
           document.removeEventListener("click", playOnInteraction);
           document.removeEventListener("touchstart", playOnInteraction);
         };
