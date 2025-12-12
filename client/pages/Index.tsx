@@ -95,6 +95,7 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-100 via-pink-100 to-blue-100">
       <Confetti />
+      <BirthdayAudio />
 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm z-50 border-b-2 border-party-pink">
