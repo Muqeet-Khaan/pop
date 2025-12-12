@@ -23,14 +23,17 @@ export function Confetti() {
   const [pieces, setPieces] = useState<ConfettiPiece[]>([]);
 
   useEffect(() => {
-    const confettiPieces: ConfettiPiece[] = Array.from({ length: 50 }, (_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      delay: Math.random() * 0.5,
-      duration: 2 + Math.random() * 1,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      size: 8 + Math.random() * 8,
-    }));
+    const confettiPieces: ConfettiPiece[] = Array.from(
+      { length: 50 },
+      (_, i) => ({
+        id: i,
+        left: Math.random() * 100,
+        delay: Math.random() * 0.5,
+        duration: 2 + Math.random() * 1,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        size: 8 + Math.random() * 8,
+      }),
+    );
 
     setPieces(confettiPieces);
 

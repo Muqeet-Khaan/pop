@@ -4,7 +4,9 @@ import { Confetti } from "@/components/Confetti";
 import { BirthdayAudio } from "@/components/BirthdayAudio";
 
 export default function Index() {
-  const [wishes, setWishes] = useState<Array<{ name: string; message: string }>>([]);
+  const [wishes, setWishes] = useState<
+    Array<{ name: string; message: string }>
+  >([]);
   const [newWish, setNewWish] = useState("");
   const [wishName, setWishName] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -63,32 +65,38 @@ export default function Index() {
     {
       emoji: "✨",
       title: "Your Radiant Energy",
-      description: "You light up every room you walk into with your infectious positivity and genuine warmth.",
+      description:
+        "You light up every room you walk into with your infectious positivity and genuine warmth.",
     },
     {
       emoji: "💪",
       title: "Incredible Strength",
-      description: "Your resilience and determination inspire everyone around you to be better.",
+      description:
+        "Your resilience and determination inspire everyone around you to be better.",
     },
     {
       emoji: "❤️",
       title: "Boundless Kindness",
-      description: "Your compassion and care for others make you truly special and loved.",
+      description:
+        "Your compassion and care for others make you truly special and loved.",
     },
     {
       emoji: "😂",
       title: "Your Amazing Humor",
-      description: "You have the gift of making people laugh and feel at ease in any situation.",
+      description:
+        "You have the gift of making people laugh and feel at ease in any situation.",
     },
     {
       emoji: "🌟",
       title: "Creative Spirit",
-      description: "Your imagination and creativity bring joy and beauty to everything you do.",
+      description:
+        "Your imagination and creativity bring joy and beauty to everything you do.",
     },
     {
       emoji: "💎",
       title: "True Friend",
-      description: "Your loyalty and support mean the world to those who are lucky enough to know you.",
+      description:
+        "Your loyalty and support mean the world to those who are lucky enough to know you.",
     },
   ];
 
@@ -108,16 +116,28 @@ export default function Index() {
               </h1>
             </div>
             <div className="hidden md:flex space-x-8">
-              <a href="#home" className="text-party-purple font-semibold hover:text-party-pink transition">
+              <a
+                href="#home"
+                className="text-party-purple font-semibold hover:text-party-pink transition"
+              >
                 Home
               </a>
-              <a href="#gallery" className="text-party-purple font-semibold hover:text-party-pink transition">
+              <a
+                href="#gallery"
+                className="text-party-purple font-semibold hover:text-party-pink transition"
+              >
                 Gallery
               </a>
-              <a href="#why" className="text-party-purple font-semibold hover:text-party-pink transition">
+              <a
+                href="#why"
+                className="text-party-purple font-semibold hover:text-party-pink transition"
+              >
                 Why We Love You
               </a>
-              <a href="#wishes" className="text-party-purple font-semibold hover:text-party-pink transition">
+              <a
+                href="#wishes"
+                className="text-party-purple font-semibold hover:text-party-pink transition"
+              >
                 Wishes
               </a>
             </div>
@@ -138,7 +158,9 @@ export default function Index() {
             Today is all about celebrating YOU! 🌟
           </p>
           <p className="text-lg text-gray-700 mb-12 max-w-2xl mx-auto leading-relaxed">
-            You deserve all the love, joy, and happiness in the world. This day is dedicated to celebrating the amazing person you are and all the wonderful moments we've shared with you.
+            You deserve all the love, joy, and happiness in the world. This day
+            is dedicated to celebrating the amazing person you are and all the
+            wonderful moments we've shared with you.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -158,14 +180,19 @@ export default function Index() {
       </section>
 
       {/* Photo Gallery */}
-      <section id="gallery" className="py-20 px-4 sm:px-6 lg:px-8 bg-white/40 backdrop-blur">
+      <section
+        id="gallery"
+        className="py-20 px-4 sm:px-6 lg:px-8 bg-white/40 backdrop-blur"
+      >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 animate-slide-up">
             <h2 className="text-5xl sm:text-6xl font-bold mb-4 bg-gradient-to-r from-party-pink to-party-purple bg-clip-text text-transparent">
               Your Beautiful Moments
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-party-pink via-party-purple to-party-blue mx-auto mb-6"></div>
-            <p className="text-lg text-gray-700">A celebration of your radiance through the lens</p>
+            <p className="text-lg text-gray-700">
+              A celebration of your radiance through the lens
+            </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -207,8 +234,12 @@ export default function Index() {
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="text-6xl mb-4">{item.emoji}</div>
-                <h3 className="text-2xl font-bold text-party-purple mb-3">{item.title}</h3>
-                <p className="text-gray-700 leading-relaxed text-lg">{item.description}</p>
+                <h3 className="text-2xl font-bold text-party-purple mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-gray-700 leading-relaxed text-lg">
+                  {item.description}
+                </p>
               </div>
             ))}
           </div>
@@ -216,20 +247,27 @@ export default function Index() {
       </section>
 
       {/* Birthday Wishes Section */}
-      <section id="wishes" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-party-pink/10 via-party-purple/10 to-party-blue/10">
+      <section
+        id="wishes"
+        className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-party-pink/10 via-party-purple/10 to-party-blue/10"
+      >
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16 animate-slide-up">
             <h2 className="text-5xl sm:text-6xl font-bold mb-4 bg-gradient-to-r from-party-purple to-party-blue bg-clip-text text-transparent">
               Birthday Wishes 🎊
             </h2>
-            <p className="text-lg text-gray-700">Share your love and birthday wishes for Fariha</p>
+            <p className="text-lg text-gray-700">
+              Share your love and birthday wishes for Fariha
+            </p>
           </div>
 
           {/* Add Wish Form */}
           <div className="bg-white rounded-2xl shadow-xl p-8 mb-12 animate-fade-in">
             <form onSubmit={handleAddWish} className="space-y-6">
               <div>
-                <label className="block text-lg font-bold text-party-purple mb-2">Your Name</label>
+                <label className="block text-lg font-bold text-party-purple mb-2">
+                  Your Name
+                </label>
                 <input
                   type="text"
                   value={wishName}
@@ -240,7 +278,9 @@ export default function Index() {
                 />
               </div>
               <div>
-                <label className="block text-lg font-bold text-party-purple mb-2">Your Birthday Wish</label>
+                <label className="block text-lg font-bold text-party-purple mb-2">
+                  Your Birthday Wish
+                </label>
                 <textarea
                   value={newWish}
                   onChange={(e) => setNewWish(e.target.value)}
@@ -263,7 +303,9 @@ export default function Index() {
           {/* Display Wishes */}
           {wishes.length > 0 && (
             <div className="space-y-6">
-              <h3 className="text-3xl font-bold text-party-purple text-center mb-8">Birthday Wishes for Fariha</h3>
+              <h3 className="text-3xl font-bold text-party-purple text-center mb-8">
+                Birthday Wishes for Fariha
+              </h3>
               {wishes.map((wish, index) => (
                 <div
                   key={index}
@@ -273,8 +315,12 @@ export default function Index() {
                   <div className="flex items-start gap-4">
                     <Heart className="w-6 h-6 text-party-pink flex-shrink-0 mt-1" />
                     <div className="flex-1">
-                      <p className="text-gray-700 text-lg leading-relaxed mb-3">{wish.message}</p>
-                      <p className="text-party-purple font-bold text-lg">— {wish.name}</p>
+                      <p className="text-gray-700 text-lg leading-relaxed mb-3">
+                        {wish.message}
+                      </p>
+                      <p className="text-party-purple font-bold text-lg">
+                        — {wish.name}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -291,10 +337,13 @@ export default function Index() {
             <div className="text-5xl mb-4">🎈🎉🎁</div>
             <h3 className="text-3xl font-bold mb-4">Happy Birthday Fariha!</h3>
             <p className="text-lg opacity-90 max-w-2xl mx-auto mb-6">
-              May your day be filled with as much joy and beauty as you bring to the world. Here's to celebrating YOU!
+              May your day be filled with as much joy and beauty as you bring to
+              the world. Here's to celebrating YOU!
             </p>
             <div className="text-2xl mb-6">✨ 💖 ✨</div>
-            <p className="opacity-75">&copy; 2024 Celebrating Fariha's Special Day</p>
+            <p className="opacity-75">
+              &copy; 2024 Celebrating Fariha's Special Day
+            </p>
           </div>
         </div>
       </footer>

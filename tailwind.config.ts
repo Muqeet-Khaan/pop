@@ -144,7 +144,7 @@ export default {
             transform: "scale(1)",
           },
         },
-        "float": {
+        float: {
           "0%, 100%": {
             transform: "translateY(0px)",
           },
@@ -170,7 +170,7 @@ export default {
         "slide-up": "slide-up 0.6s ease-out",
         "slide-in-left": "slide-in-left 0.6s ease-out",
         "bounce-in": "bounce-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)",
-        "float": "float 3s ease-in-out infinite",
+        float: "float 3s ease-in-out infinite",
         "confetti-fall": "confetti-fall 3s ease-in forwards",
       },
       fontFamily: {
