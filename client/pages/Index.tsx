@@ -1,242 +1,185 @@
 import { useState } from "react";
-import { ChevronDown, Mail, Phone, MapPin, Instagram, Facebook } from "lucide-react";
+import { Heart, Send } from "lucide-react";
+import { Confetti } from "@/components/Confetti";
 
 export default function Index() {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [message, setMessage] = useState("");
+  const [wishes, setWishes] = useState<Array<{ name: string; message: string }>>([]);
+  const [newWish, setNewWish] = useState("");
+  const [wishName, setWishName] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleAddWish = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setEmail("");
-      setName("");
-      setMessage("");
-      setSubmitted(false);
-    }, 2000);
+    if (newWish.trim() && wishName.trim()) {
+      setWishes([...wishes, { name: wishName, message: newWish }]);
+      setNewWish("");
+      setWishName("");
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 2000);
+    }
   };
 
-  const galleryItems = [
+  const photos = [
     {
-      image:
-        "https://cdn.builder.io/api/v1/image/assets%2F097a4358a92c4fd2a0bf0d62e32611f3%2F2e7418c9a72e40caa0a1de13da81536a?format=webp&width=800",
-      title: "Elegant Yellow",
-      color: "Gold & Black",
+      url: "https://cdn.builder.io/api/v1/image/assets%2F097a4358a92c4fd2a0bf0d62e32611f3%2Fc918e594deec46c49d9215ebb68e5832?format=webp&width=800",
+      title: "Radiant in Yellow",
     },
     {
-      image:
-        "https://cdn.builder.io/api/v1/image/assets%2F097a4358a92c4fd2a0bf0d62e32611f3%2Fb4ca2d44309e4d6298424fb1f70c78a0?format=webp&width=800",
-      title: "Burgundy Statement",
-      color: "Wine Red Formal",
+      url: "https://cdn.builder.io/api/v1/image/assets%2F097a4358a92c4fd2a0bf0d62e32611f3%2F9e47206bef52489780fe8653b81c1a44?format=webp&width=800",
+      title: "Golden Beauty",
     },
     {
-      image:
-        "https://cdn.builder.io/api/v1/image/assets%2F097a4358a92c4fd2a0bf0d62e32611f3%2Fb7970d033f6d413788c22a50e04ae8f4?format=webp&width=800",
-      title: "Casual Chic",
-      color: "Black & White",
+      url: "https://cdn.builder.io/api/v1/image/assets%2F097a4358a92c4fd2a0bf0d62e32611f3%2F35a5b86a44f54567a6dae52cac54421c?format=webp&width=800",
+      title: "Elegant Style",
     },
     {
-      image:
-        "https://cdn.builder.io/api/v1/image/assets%2F097a4358a92c4fd2a0bf0d62e32611f3%2Ff39d142fc3534ef88f613a9977b9c976?format=webp&width=800",
-      title: "Urban Style",
-      color: "Monochrome",
+      url: "https://cdn.builder.io/api/v1/image/assets%2F097a4358a92c4fd2a0bf0d62e32611f3%2Ff0223f1304a44e51aa6480b6b8e398ca?format=webp&width=800",
+      title: "Urban Chic",
     },
     {
-      image:
-        "https://cdn.builder.io/api/v1/image/assets%2F097a4358a92c4fd2a0bf0d62e32611f3%2Fac3cace1adde4ababbec02dbe1a91ea9?format=webp&width=800",
-      title: "Luxe Gold",
-      color: "Gold & Cream",
+      url: "https://cdn.builder.io/api/v1/image/assets%2F097a4358a92c4fd2a0bf0d62e32611f3%2Fc3d2d235f53a42159c9d2e2bc7ac7fb8?format=webp&width=800",
+      title: "Confident Smile",
     },
     {
-      image:
-        "https://cdn.builder.io/api/v1/image/assets%2F097a4358a92c4fd2a0bf0d62e32611f3%2F39dc45074f184615b94432d1b9e55913?format=webp&width=800",
-      title: "Nature Green",
-      color: "Teal & Olive",
+      url: "https://cdn.builder.io/api/v1/image/assets%2F097a4358a92c4fd2a0bf0d62e32611f3%2F12ff2557aba544a4bf746e66e0145fb2?format=webp&width=800",
+      title: "Nature's Grace",
     },
     {
-      image:
-        "https://cdn.builder.io/api/v1/image/assets%2F097a4358a92c4fd2a0bf0d62e32611f3%2F75f11e1e8f934f71bf6ede8d253a9f9b?format=webp&width=800",
-      title: "Garden Vibes",
-      color: "Green Botanical",
+      url: "https://cdn.builder.io/api/v1/image/assets%2F097a4358a92c4fd2a0bf0d62e32611f3%2F709d665db22749bcb9a60bd7f927c8cc?format=webp&width=800",
+      title: "Playful Moment",
     },
     {
-      image:
-        "https://cdn.builder.io/api/v1/image/assets%2F097a4358a92c4fd2a0bf0d62e32611f3%2F46d69000d9f24b61b25079253ef0ae23?format=webp&width=800",
-      title: "Minimalist Chic",
-      color: "Cream & Muted",
+      url: "https://cdn.builder.io/api/v1/image/assets%2F097a4358a92c4fd2a0bf0d62e32611f3%2Fd58bd324b2c14518a6abedbbf1d4d19e?format=webp&width=800",
+      title: "Pure Joy",
+    },
+    {
+      url: "https://cdn.builder.io/api/v1/image/assets%2F097a4358a92c4fd2a0bf0d62e32611f3%2F402bb0bff04e4fe58eba43d1bc1bf388?format=webp&width=800",
+      title: "Serene Beauty",
     },
   ];
 
-  const services = [
+  const whyWeLove = [
     {
-      icon: "✨",
-      title: "Styling Consultation",
-      description: "Personalized hijab styling advice tailored to your preferences and lifestyle",
+      emoji: "✨",
+      title: "Your Radiant Energy",
+      description: "You light up every room you walk into with your infectious positivity and genuine warmth.",
     },
     {
-      icon: "📸",
-      title: "Photo Sessions",
-      description: "Professional photography showcasing your unique hijab looks and style evolution",
+      emoji: "💪",
+      title: "Incredible Strength",
+      description: "Your resilience and determination inspire everyone around you to be better.",
     },
     {
-      icon: "🎨",
-      title: "Color Coordination",
-      description: "Expert guidance on color combinations and outfit pairings that complement your complexion",
+      emoji: "❤️",
+      title: "Boundless Kindness",
+      description: "Your compassion and care for others make you truly special and loved.",
     },
     {
-      icon: "👗",
-      title: "Wardrobe Planning",
-      description: "Curated wardrobe suggestions for different seasons and occasions",
+      emoji: "😂",
+      title: "Your Amazing Humor",
+      description: "You have the gift of making people laugh and feel at ease in any situation.",
     },
     {
-      icon: "💎",
-      title: "Accessory Selection",
-      description: "Personalized recommendations for jewelry and accessories to complete your look",
+      emoji: "🌟",
+      title: "Creative Spirit",
+      description: "Your imagination and creativity bring joy and beauty to everything you do.",
     },
     {
-      icon: "🌟",
-      title: "Confidence Coaching",
-      description: "Build confidence in your style choices with expert guidance and support",
+      emoji: "💎",
+      title: "True Friend",
+      description: "Your loyalty and support mean the world to those who are lucky enough to know you.",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-white text-foreground">
+    <div className="min-h-screen bg-gradient-to-b from-purple-100 via-pink-100 to-blue-100">
+      <Confetti />
+
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm z-50 border-b border-border">
+      <nav className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm z-50 border-b-2 border-party-pink">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            <div className="flex items-center">
-              <h1 className="text-2xl font-bold text-primary">Hijab Stories</h1>
+            <div className="flex items-center gap-2">
+              <span className="text-3xl">🎉</span>
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-party-pink via-party-purple to-party-blue bg-clip-text text-transparent">
+                Happy Birthday Fariha
+              </h1>
             </div>
             <div className="hidden md:flex space-x-8">
-              <a href="#home" className="text-foreground hover:text-accent transition">
+              <a href="#home" className="text-party-purple font-semibold hover:text-party-pink transition">
                 Home
               </a>
-              <a href="#gallery" className="text-foreground hover:text-accent transition">
+              <a href="#gallery" className="text-party-purple font-semibold hover:text-party-pink transition">
                 Gallery
               </a>
-              <a href="#services" className="text-foreground hover:text-accent transition">
-                Services
+              <a href="#why" className="text-party-purple font-semibold hover:text-party-pink transition">
+                Why We Love You
               </a>
-              <a href="#contact" className="text-foreground hover:text-accent transition">
-                Contact
+              <a href="#wishes" className="text-party-purple font-semibold hover:text-party-pink transition">
+                Wishes
               </a>
             </div>
-            <button className="md:hidden">
-              <ChevronDown className="w-6 h-6" />
-            </button>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-20 bg-gradient-to-br from-slate-50 to-amber-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="animate-fade-in">
-              <h2 className="text-5xl md:text-6xl font-bold text-primary mb-6 leading-tight">
-                Celebrate Your Unique Style
-              </h2>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Discover the art of modest fashion and express yourself with confidence through expertly
-                coordinated hijab styles tailored to your personality and lifestyle.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button className="px-8 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-accent/90 transition transform hover:scale-105">
-                  Book Consultation
-                </button>
-                <button className="px-8 py-3 border-2 border-accent text-accent font-semibold rounded-lg hover:bg-accent/5 transition">
-                  Explore Gallery
-                </button>
-              </div>
-            </div>
-            <div className="animate-slide-in-left">
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F097a4358a92c4fd2a0bf0d62e32611f3%2Fac3cace1adde4ababbec02dbe1a91ea9?format=webp&width=800"
-                alt="Featured Style"
-                className="rounded-2xl shadow-2xl w-full object-cover aspect-square"
-              />
-            </div>
+      <section id="home" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center animate-fade-in">
+          <div className="mb-6 text-6xl sm:text-7xl animate-float">🎂</div>
+          <h2 className="text-6xl sm:text-7xl font-bold mb-6 bg-gradient-to-r from-party-pink via-party-purple to-party-blue bg-clip-text text-transparent">
+            Happy Birthday
+            <br />
+            Fariha!
+          </h2>
+          <p className="text-xl sm:text-2xl text-party-purple mb-12 font-semibold">
+            Today is all about celebrating YOU! 🌟
+          </p>
+          <p className="text-lg text-gray-700 mb-12 max-w-2xl mx-auto leading-relaxed">
+            You deserve all the love, joy, and happiness in the world. This day is dedicated to celebrating the amazing person you are and all the wonderful moments we've shared with you.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="#gallery"
+              className="px-8 py-4 bg-gradient-to-r from-party-pink to-party-purple text-white font-bold rounded-full text-lg hover:shadow-2xl transition transform hover:scale-105 inline-block"
+            >
+              View Gallery 📸
+            </a>
+            <a
+              href="#why"
+              className="px-8 py-4 bg-gradient-to-r from-party-blue to-party-cyan text-white font-bold rounded-full text-lg hover:shadow-2xl transition transform hover:scale-105 inline-block"
+            >
+              Why We Love You 💕
+            </a>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-20 md:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Photo Gallery */}
+      <section id="gallery" className="py-20 px-4 sm:px-6 lg:px-8 bg-white/40 backdrop-blur">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 animate-slide-up">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">About Us</h2>
-            <div className="w-20 h-1 bg-accent mx-auto mb-8"></div>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Welcome to Hijab Stories, where modest fashion meets modern style. We believe that hijab
-              is not just a religious practice, but a powerful form of self-expression and confidence.
-            </p>
+            <h2 className="text-5xl sm:text-6xl font-bold mb-4 bg-gradient-to-r from-party-pink to-party-purple bg-clip-text text-transparent">
+              Your Beautiful Moments
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-party-pink via-party-purple to-party-blue mx-auto mb-6"></div>
+            <p className="text-lg text-gray-700">A celebration of your radiance through the lens</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <div className="animate-fade-in">
-                <h3 className="text-2xl font-bold text-primary mb-3">Our Mission</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  We empower individuals to express their unique style through thoughtfully curated hijab
-                  looks that celebrate modesty, confidence, and personal authenticity.
-                </p>
-              </div>
-              <div className="animate-fade-in" style={{ animationDelay: "0.1s" }}>
-                <h3 className="text-2xl font-bold text-primary mb-3">Expert Styling</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Our team of experienced stylists combines cultural appreciation with modern fashion
-                  trends to create looks that are both timeless and contemporary.
-                </p>
-              </div>
-              <div className="animate-fade-in" style={{ animationDelay: "0.2s" }}>
-                <h3 className="text-2xl font-bold text-primary mb-3">Community Focus</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  We celebrate diversity and believe that beauty comes in many forms. Every style is
-                  unique, and we're here to help you discover yours.
-                </p>
-              </div>
-            </div>
-            <div className="rounded-2xl overflow-hidden shadow-lg">
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F097a4358a92c4fd2a0bf0d62e32611f3%2F2e7418c9a72e40caa0a1de13da81536a?format=webp&width=800"
-                alt="About Us"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery Section */}
-      <section id="gallery" className="py-20 md:py-32 bg-gradient-to-br from-slate-50 to-amber-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-slide-up">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">Style Gallery</h2>
-            <div className="w-20 h-1 bg-accent mx-auto mb-8"></div>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Explore our carefully curated collection of hijab styles and modest fashion looks.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {galleryItems.map((item, index) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {photos.map((photo, index) => (
               <div
                 key={index}
-                className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition duration-500 animate-slide-up cursor-pointer"
-                style={{ animationDelay: `${index * 0.05}s` }}
+                className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition duration-500 animate-bounce-in"
+                style={{ animationDelay: `${index * 0.08}s` }}
               >
                 <img
-                  src={item.image}
-                  alt={item.title}
+                  src={photo.url}
+                  alt={photo.title}
                   className="w-full h-80 object-cover group-hover:scale-110 transition duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
-                  <h3 className="text-white text-lg font-bold">{item.title}</h3>
-                  <p className="text-amber-200 text-sm">{item.color}</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
+                  <p className="text-white text-xl font-bold">{photo.title}</p>
                 </div>
               </div>
             ))}
@@ -244,170 +187,112 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section id="services" className="py-20 md:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Why We Love Fariha */}
+      <section id="why" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 animate-slide-up">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">Our Services</h2>
-            <div className="w-20 h-1 bg-accent mx-auto mb-8"></div>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Discover our comprehensive range of styling services designed to enhance your confidence.
-            </p>
+            <h2 className="text-5xl sm:text-6xl font-bold mb-4 bg-gradient-to-r from-party-pink to-party-blue bg-clip-text text-transparent">
+              Why We Love Fariha ❤️
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-party-pink via-party-purple to-party-blue mx-auto"></div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {services.map((service, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {whyWeLove.map((item, index) => (
               <div
                 key={index}
-                className="p-8 bg-gradient-to-br from-slate-50 to-amber-50 rounded-xl shadow-lg hover:shadow-xl transition duration-300 animate-fade-in border border-border"
+                className="p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 border-2 border-transparent hover:border-party-pink animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="text-5xl mb-4">{service.icon}</div>
-                <h3 className="text-xl font-bold text-primary mb-3">{service.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+                <div className="text-6xl mb-4">{item.emoji}</div>
+                <h3 className="text-2xl font-bold text-party-purple mb-3">{item.title}</h3>
+                <p className="text-gray-700 leading-relaxed text-lg">{item.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20 md:py-32 bg-gradient-to-br from-primary to-accent/20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Birthday Wishes Section */}
+      <section id="wishes" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-party-pink/10 via-party-purple/10 to-party-blue/10">
+        <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16 animate-slide-up">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Get in Touch</h2>
-            <div className="w-20 h-1 bg-amber-400 mx-auto"></div>
-            <p className="text-lg text-white/80 max-w-2xl mx-auto mt-8">
-              Ready to transform your style? Reach out to us for consultations, bookings, or inquiries.
-            </p>
+            <h2 className="text-5xl sm:text-6xl font-bold mb-4 bg-gradient-to-r from-party-purple to-party-blue bg-clip-text text-transparent">
+              Birthday Wishes 🎊
+            </h2>
+            <p className="text-lg text-gray-700">Share your love and birthday wishes for Fariha</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <div className="bg-white rounded-xl p-6 text-center shadow-lg animate-fade-in">
-              <Mail className="w-10 h-10 text-accent mx-auto mb-4" />
-              <h3 className="font-semibold text-primary mb-2">Email</h3>
-              <p className="text-muted-foreground">contact@hijabstories.com</p>
-            </div>
-            <div className="bg-white rounded-xl p-6 text-center shadow-lg animate-fade-in" style={{ animationDelay: "0.1s" }}>
-              <Phone className="w-10 h-10 text-accent mx-auto mb-4" />
-              <h3 className="font-semibold text-primary mb-2">Phone</h3>
-              <p className="text-muted-foreground">+1 (555) 123-4567</p>
-            </div>
-            <div className="bg-white rounded-xl p-6 text-center shadow-lg animate-fade-in" style={{ animationDelay: "0.2s" }}>
-              <MapPin className="w-10 h-10 text-accent mx-auto mb-4" />
-              <h3 className="font-semibold text-primary mb-2">Location</h3>
-              <p className="text-muted-foreground">New York, NY</p>
-            </div>
-          </div>
-
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 shadow-xl animate-fade-in">
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
+          {/* Add Wish Form */}
+          <div className="bg-white rounded-2xl shadow-xl p-8 mb-12 animate-fade-in">
+            <form onSubmit={handleAddWish} className="space-y-6">
               <div>
-                <label className="block text-sm font-semibold text-primary mb-2">Name</label>
+                <label className="block text-lg font-bold text-party-purple mb-2">Your Name</label>
                 <input
                   type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Your name"
-                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
+                  value={wishName}
+                  onChange={(e) => setWishName(e.target.value)}
+                  placeholder="Enter your name"
+                  className="w-full px-6 py-3 border-2 border-party-pink rounded-xl focus:outline-none focus:border-party-purple transition text-lg"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-primary mb-2">Email</label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email"
-                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
+                <label className="block text-lg font-bold text-party-purple mb-2">Your Birthday Wish</label>
+                <textarea
+                  value={newWish}
+                  onChange={(e) => setNewWish(e.target.value)}
+                  placeholder="Share your heartfelt wishes for Fariha..."
+                  rows={4}
+                  className="w-full px-6 py-3 border-2 border-party-pink rounded-xl focus:outline-none focus:border-party-purple transition resize-none text-lg"
                   required
-                />
+                ></textarea>
               </div>
+              <button
+                type="submit"
+                className="w-full py-4 bg-gradient-to-r from-party-pink to-party-purple text-white font-bold rounded-xl text-lg hover:shadow-xl transition transform hover:scale-105 flex items-center justify-center gap-2"
+              >
+                <Send className="w-5 h-5" />
+                {submitted ? "Wish Sent! 💕" : "Send Wish"}
+              </button>
+            </form>
+          </div>
+
+          {/* Display Wishes */}
+          {wishes.length > 0 && (
+            <div className="space-y-6">
+              <h3 className="text-3xl font-bold text-party-purple text-center mb-8">Birthday Wishes for Fariha</h3>
+              {wishes.map((wish, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-party-pink animate-slide-up"
+                  style={{ animationDelay: `${index * 0.05}s` }}
+                >
+                  <div className="flex items-start gap-4">
+                    <Heart className="w-6 h-6 text-party-pink flex-shrink-0 mt-1" />
+                    <div className="flex-1">
+                      <p className="text-gray-700 text-lg leading-relaxed mb-3">{wish.message}</p>
+                      <p className="text-party-purple font-bold text-lg">— {wish.name}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="mb-6">
-              <label className="block text-sm font-semibold text-primary mb-2">Message</label>
-              <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Tell us about your styling needs..."
-                rows={5}
-                className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent resize-none"
-                required
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              className="w-full py-3 bg-accent text-white font-semibold rounded-lg hover:bg-accent/90 transition transform hover:scale-105"
-            >
-              {submitted ? "Message Sent! 🎉" : "Send Message"}
-            </button>
-          </form>
+          )}
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-primary text-white py-12">
+      <footer className="bg-gradient-to-r from-party-purple via-party-pink to-party-blue text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h3 className="text-xl font-bold mb-4">Hijab Stories</h3>
-              <p className="text-white/70">Celebrating modesty, style, and confidence.</p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-white/70">
-                <li>
-                  <a href="#home" className="hover:text-white transition">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a href="#gallery" className="hover:text-white transition">
-                    Gallery
-                  </a>
-                </li>
-                <li>
-                  <a href="#services" className="hover:text-white transition">
-                    Services
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Services</h4>
-              <ul className="space-y-2 text-white/70">
-                <li>
-                  <a href="#services" className="hover:text-white transition">
-                    Styling Consultation
-                  </a>
-                </li>
-                <li>
-                  <a href="#services" className="hover:text-white transition">
-                    Photo Sessions
-                  </a>
-                </li>
-                <li>
-                  <a href="#services" className="hover:text-white transition">
-                    Color Coordination
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Follow Us</h4>
-              <div className="flex space-x-4">
-                <a href="#" className="text-white/70 hover:text-white transition">
-                  <Instagram className="w-5 h-5" />
-                </a>
-                <a href="#" className="text-white/70 hover:text-white transition">
-                  <Facebook className="w-5 h-5" />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-white/20 pt-8 text-center text-white/60">
-            <p>&copy; 2024 Hijab Stories. All rights reserved.</p>
+          <div className="text-center">
+            <div className="text-5xl mb-4">🎈🎉🎁</div>
+            <h3 className="text-3xl font-bold mb-4">Happy Birthday Fariha!</h3>
+            <p className="text-lg opacity-90 max-w-2xl mx-auto mb-6">
+              May your day be filled with as much joy and beauty as you bring to the world. Here's to celebrating YOU!
+            </p>
+            <div className="text-2xl mb-6">✨ 💖 ✨</div>
+            <p className="opacity-75">&copy; 2024 Celebrating Fariha's Special Day</p>
           </div>
         </div>
       </footer>
