@@ -69,6 +69,15 @@ export default {
           800: "#6e4515",
           900: "#5a3810",
         },
+        party: {
+          pink: "#ff1493",
+          purple: "#9d4edd",
+          blue: "#3a86ff",
+          cyan: "#00f5ff",
+          lime: "#39ff14",
+          orange: "#ff6b35",
+          gold: "#ffd60a",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
